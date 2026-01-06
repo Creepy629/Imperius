@@ -2,6 +2,8 @@
 
 Aplicación móvil y de escritorio para gestionar tus tareas de forma sencilla e intuitiva. Permite crear recordatorios basado en importancia por colores, ver tareas en calendario y consultar detalles sin complicaciones. Pensada para uso diario: organizada, ligera y con recordatorios en dispositivos Android.
 
+![El pilar de tus proyectos](/Imperius/Resources/Images/logo.png)
+
 ---
 
 Imperius te ayuda a mantener tus tareas bajo control. Añade tareas, programa recordatorios y visualízalas en un calendario para gestionar tu tiempo mejor. La aplicación funciona sin conexión y guarda tus datos localmente en el dispositivo. Si usas Android, recibirás notificaciones locales para los recordatorios.
