@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Imperius.Vista.Calendario"
+             xmlns:vm="clr-namespace:Imperius.VistaModelo"
+             Title="Calendario"
+             Padding="20" 
+             BackgroundColor="#0B0B0B">
+
+    <VerticalStackLayout Spacing="20">
+
+        <Border BackgroundColor="#1A1A1A" 
+                StrokeShape="RoundRectangle 12" 
+                Padding="15" 
+                StrokeThickness="1" 
+                Stroke="#2A2A2A">
+
+            <VerticalStackLayout Spacing="15">
+
+                <Grid ColumnDefinitions="Auto,*,Auto" VerticalOptions="Center">
+                    <Button Grid.Column="0" Text="&lt;"
+                        Command="{Binding MesAnteriorCommand}" HorizontalOptions="Start" WidthRequest="40" HeightRequest="40" CornerRadius="20" BackgroundColor="#6C1D45" TextColor="White" />
+                    <Label Grid.Column="1" Text="{Binding MesAñoActual}" FontSize="20" FontFamily="Century Schoolbook" FontAttributes="Bold" HorizontalOptions="Center" VerticalOptions="Center" TextColor="White" />
+                    <Button Grid.Column="2" Text="&gt;"
+                        Command="{Binding MesSiguienteCommand}" HorizontalOptions="End" WidthRequest="40" HeightRequest="40" CornerRadius="20" BackgroundColor="#6C1D45" TextColor="White" />
+                </Grid>
+
+                <Grid ColumnDefinitions="*,*,*,*,*,*,*">
+                    <Label Grid.Column="0" Text="L" HorizontalOptions="Center" FontAttributes="Bold" FontFamily="Century Schoolbook" TextColor="White"/>
+                    <Label Grid.Column="1" Text="M" HorizontalOptions="Center" FontAttributes="Bold" FontFamily="Century Schoolbook" TextColor="White"/>
+                    <Label Grid.Column="2" Text="X" HorizontalOptions="Center" FontAttributes="Bold" FontFamily="Century Schoolbook" TextColor="White"/>
+                    <Label Grid.Column="3" Text="J" HorizontalOptions="Center" FontAttributes="Bold" FontFamily="Century Schoolbook" TextColor="White"/>
+                    <Label Grid.Column="4" Text="V" HorizontalOptions="Center" FontAttributes="Bold" FontFamily="Century Schoolbook" TextColor="White"/>
+                    <Label Grid.Column="5" Text="S" HorizontalOptions="Center" FontAttributes="Bold" FontFamily="Century Schoolbook" TextColor="White"/>
+                    <Label Grid.Column="6" Text="D" HorizontalOptions="Center" FontAttributes="Bold" FontFamily="Century Schoolbook" TextColor="White"/>
+                </Grid>
+
+                <Grid ColumnDefinitions="*,*,*,*,*,*,*" RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto" RowSpacing="8" ColumnSpacing="8" BindableLayout.ItemsSource="{Binding DiasDelMes}">
+                    <BindableLayout.ItemTemplate>
+                        <DataTemplate x:DataType="vm:DiaVistaModelo">
+                            <Border Grid.Row="{Binding GridRow}" Grid.Column="{Binding GridColumn}"
+                                    Padding="6" StrokeShape="RoundRectangle 8"
+                                    MinimumHeightRequest="90">
+                                <Border.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type vm:CalendarioVistaModelo}}, Path=SeleccionarDiaCommand}"
+                                                      CommandParameter="{Binding .}" />
+                                </Border.GestureRecognizers>
+                                <Border.Style>
+                                    <Style TargetType="Border">
+                                        <Style.Triggers>
+                                            <DataTrigger TargetType="Border" Binding="{Binding EsVacio}" Value="True">
+                                                <Setter Property="IsVisible" Value="False" />
+                                            </DataTrigger>
+
+                                            <DataTrigger TargetType="Border" Binding="{Binding EsHoy}" Value="True">
+                                                <Setter Property="BackgroundColor" Value="#6C1D45" />
+                                                <Setter Property="Stroke" Value="#6C1D45" />
+                                            </DataTrigger>
+
+                                            <DataTrigger TargetType="Border" Binding="{Binding TieneEvento}" Value="True">
+                                                <Setter Property="BackgroundColor" Value="#FFF7E6" />
+                                                <Setter Property="Stroke" Value="{Binding EventoColorHex}" />
+                                                <Setter Property="Padding" Value="8" />
+                                            </DataTrigger>
+
+                                            <MultiTrigger TargetType="Border">
+                                                <MultiTrigger.Conditions>
+                                                    <BindingCondition Binding="{Binding EsVacio}" Value="False" />
+                                                    <BindingCondition Binding="{Binding EsHoy}" Value="False" />
+                                                    <BindingCondition Binding="{Binding TieneEvento}" Value="False" />
+                                                </MultiTrigger.Conditions>
+                                                <Setter Property="Stroke" Value="#2A2A2A" />
+                                            </MultiTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Border.Style>
+
+                                <VerticalStackLayout>
+                                    <Label x:Name="labelNumeroDia" Text="{Binding NumeroDia}" FontSize="12" HorizontalOptions="Start">
+                                        <Label.Style>
+                                            <Style TargetType="Label">
+                                                <Setter Property="TextColor" Value="White" />
+                                                <Style.Triggers>
+                                                    <DataTrigger TargetType="Label" Binding="{Binding EsHoy}" Value="True">
+                                                        <Setter Property="TextColor" Value="White" />
+                                                        <Setter Property="FontAttributes" Value="Bold" />
+                                                    </DataTrigger>
+                                                    <MultiTrigger TargetType="Label">
+                                                        <MultiTrigger.Conditions>
+                                                            <BindingCondition Binding="{Binding TieneEvento}" Value="True" />
+                                                            <BindingCondition Binding="{Binding EsHoy}" Value="False" />
+                                                        </MultiTrigger.Conditions>
+                                                        <Setter Property="TextColor" Value="Black" />
+                                                    </MultiTrigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </Label.Style>
+                                    </Label>
+
+                                    <Label x:Name="labelTituloEvento" Text="{Binding TituloEvento}" FontSize="13" FontAttributes="Bold" LineBreakMode="TailTruncation" IsVisible="{Binding TieneEvento}">
+                                        <Label.Style>
+                                            <Style TargetType="Label">
+                                                <Setter Property="TextColor" Value="Black" />
+                                                <Style.Triggers>
+                                                    <DataTrigger TargetType="Label" Binding="{Binding EsHoy}" Value="True">
+                                                        <Setter Property="TextColor" Value="White" />
+                                                    </DataTrigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </Label.Style>
+                                    </Label>
+
+                                    <Label x:Name="labelDetallesEvento" Text="{Binding DetallesEvento}" FontSize="11" LineBreakMode="TailTruncation" IsVisible="{Binding TieneEvento}">
+                                        <Label.Style>
+                                            <Style TargetType="Label">
+                                                <Setter Property="TextColor" Value="#444444" />
+                                                <Style.Triggers>
+                                                    <DataTrigger TargetType="Label" Binding="{Binding EsHoy}" Value="True">
+                                                        <Setter Property="TextColor" Value="#E0E0E0" />
+                                                    </DataTrigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </Label.Style>
+                                    </Label>
+                                </VerticalStackLayout>
+                            </Border>
+                        </DataTemplate>
+                    </BindableLayout.ItemTemplate>
+                </Grid>
+            </VerticalStackLayout>
+
+        </Border>
+
+    </VerticalStackLayout>
+</ContentPage>

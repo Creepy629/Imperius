@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Imperius.Vista.Signup"
+             Padding="24"
+             BackgroundColor="#0B0B0B">
+
+    <StackLayout Spacing="32" VerticalOptions="Center" HorizontalOptions="Center">
+        <VerticalStackLayout WidthRequest="520" VerticalOptions="Center" HorizontalOptions="Center">
+            <Grid RowDefinitions="Auto,Auto" ColumnDefinitions="*">
+                <Label Text="Imperius"
+                       FontAttributes="Bold"
+                       FontFamily="Century Schoolbook"
+                       FontSize="28"
+                       Grid.Row="0"
+                       Grid.Column="0"
+                       HorizontalOptions="Center"
+                       VerticalOptions="Center"
+                       TextColor="White"/>
+                <Label Text="Regístrate para usar la app"
+                       FontFamily="Century Schoolbook"
+                       FontSize="16"
+                       Grid.Row="1"
+                       Grid.Column="0"
+                       HorizontalOptions="Center"
+                       VerticalOptions="Center"
+                       Margin="0,8,0,0"
+                       TextColor="White"/>
+            </Grid>
+        </VerticalStackLayout>
+
+        <VerticalStackLayout WidthRequest="360" VerticalOptions="Center" HorizontalOptions="Center">
+            <Border Stroke="DimGrey" Padding="20">
+                <Grid RowSpacing="8" RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto" ColumnDefinitions="*">
+                    <VerticalStackLayout Grid.Row="0" HorizontalOptions="Center">
+                        <Label Text="Crear cuenta" FontFamily="Century Schoolbook" FontSize="18" HorizontalOptions="Center" TextColor="White"/>
+                    </VerticalStackLayout>
+
+                    <HorizontalStackLayout Grid.Row="1" Padding="4" HeightRequest="48" Spacing="8" VerticalOptions="Center" HorizontalOptions="Fill">
+                        <Label Text="🧑" FontSize="18" VerticalOptions="Center" TextColor="White" />
+                        <Entry Placeholder="Nombre"
+                               BackgroundColor="Transparent"
+                               HorizontalOptions="Fill"
+                               VerticalOptions="Center"
+                               Text="{Binding Nombre}"
+                               TextColor="White"
+                               PlaceholderColor="LightGray"
+                               x:Name="EntNombre"/>
+                    </HorizontalStackLayout>
+
+                    <HorizontalStackLayout Grid.Row="2" Padding="4" HeightRequest="48" Spacing="8" VerticalOptions="Center" HorizontalOptions="Fill">
+                        <Label Text="👤" FontSize="18" VerticalOptions="Center" TextColor="White" />
+                        <Entry Placeholder="Apellido"
+                               BackgroundColor="Transparent"
+                               HorizontalOptions="Fill"
+                               VerticalOptions="Center"
+                               Text="{Binding Apellido}"
+                               TextColor="White"
+                               PlaceholderColor="LightGray"
+                               x:Name="EntApellido"/>
+                    </HorizontalStackLayout>
+
+                    <HorizontalStackLayout Grid.Row="3" Padding="4" HeightRequest="48" Spacing="8" VerticalOptions="Center" HorizontalOptions="Fill">
+                        <Label Text="📧" FontSize="18" VerticalOptions="Center" TextColor="White" />
+                        <Entry Placeholder="Correo"
+                               Keyboard="Email"
+                               BackgroundColor="Transparent"
+                               HorizontalOptions="Fill"
+                               VerticalOptions="Center"
+                               Text="{Binding Correo}"
+                               TextColor="White"
+                               PlaceholderColor="LightGray"
+                               x:Name="EntCorreo"/>
+                    </HorizontalStackLayout>
+
+                    <HorizontalStackLayout Grid.Row="4" Padding="4" HeightRequest="48" Spacing="8" VerticalOptions="Center" HorizontalOptions="Fill">
+                        <Label Text="🎓" FontSize="18" VerticalOptions="Center" TextColor="White" />
+                        <Entry Placeholder="Boleta"
+                               BackgroundColor="Transparent"
+                               HorizontalOptions="Fill"
+                               VerticalOptions="Center"
+                               Text="{Binding Boleta}"
+                               TextColor="White"
+                               PlaceholderColor="LightGray"
+                               x:Name="EntBoleta"/>
+                    </HorizontalStackLayout>
+
+                    <HorizontalStackLayout Grid.Row="5" Padding="4" HeightRequest="48" Spacing="8" VerticalOptions="Center" HorizontalOptions="Fill">
+                        <Label Text="🔒" FontSize="18" VerticalOptions="Center" TextColor="White" />
+                        <Entry Placeholder="Contraseña"
+                               IsPassword="True"
+                               BackgroundColor="Transparent"
+                               HorizontalOptions="Fill"
+                               VerticalOptions="Center"
+                               Text="{Binding Contrasena}"
+                               TextColor="White"
+                               PlaceholderColor="LightGray"
+                               x:Name="EntContrasena"/>
+                    </HorizontalStackLayout>
+
+                    <HorizontalStackLayout Grid.Row="6" HorizontalOptions="Fill" VerticalOptions="Center" Padding="4,8,0,0" Spacing="8">
+                        <Button Text="Registrar"
+                                TextColor="Black"
+                                BackgroundColor="White"
+                                CornerRadius="24"
+                                HeightRequest="48"
+                                HorizontalOptions="Fill"
+                                Command="{Binding RegistrarCommand}"/>
+                        <Button Text="Volver"
+                                TextColor="Black"
+                                BackgroundColor="White"
+                                CornerRadius="24"
+                                HeightRequest="48"
+                                HorizontalOptions="Fill"
+                                x:Name="Back"
+                                Clicked="Back_Clicked"/>
+                    </HorizontalStackLayout>
+                </Grid>
+            </Border>
+        </VerticalStackLayout>
+    </StackLayout>
+</ContentPage>

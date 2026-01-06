@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Shell
+    x:Class="Imperius.AppShell"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:Vista="clr-namespace:Imperius.Vista"
+    xmlns:VistaModelo="clr-namespace:Imperius.VistaModelo"
+    Title="Imperius"
+    Shell.BackgroundColor="#6C1D45"
+    Shell.TitleColor="White"
+    FlyoutBackgroundColor="#854565">
+
+    <ShellContent
+        ContentTemplate="{DataTemplate Vista:Startup}"
+        Route="Principal"
+        FlyoutItemIsVisible="False"
+        Shell.FlyoutBehavior="Disabled"/>
+
+    <ShellContent
+        ContentTemplate="{DataTemplate Vista:Login}"
+        Route="IniciarSesion"
+        FlyoutItemIsVisible="False"
+        Shell.FlyoutBehavior="Disabled"/>
+
+    <FlyoutItem Title="Menú Principal" Route="Menu">
+        <ShellContent Title="Menu" ContentTemplate="{DataTemplate Vista:Menu}" />
+    </FlyoutItem>
+
+    <FlyoutItem Title="Calendario" Route="calendario">
+        <ShellContent Title="Calendario" ContentTemplate="{DataTemplate Vista:Calendario}" />
+    </FlyoutItem>
+
+    <ShellContent
+        ContentTemplate="{DataTemplate Vista:Signup}"
+        Route="Signup"
+        FlyoutItemIsVisible="False" />
+
+    <MenuItem Text="Cerrar sesión"
+              Clicked="OnLogoutClicked"/>
+
+</Shell>

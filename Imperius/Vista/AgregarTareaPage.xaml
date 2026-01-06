@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Imperius.Vista.AgregarTareaPage"
+             Title="Nueva actividad"
+             Padding="20"
+             BackgroundColor="#0B0B0B">
+
+    <ScrollView>
+        <VerticalStackLayout Spacing="20">
+
+            <Border BackgroundColor="#1A1A1A" StrokeShape="RoundRectangle 12" Padding="20" StrokeThickness="1" Stroke="#6C1D45">
+                <Label Text="Crear Nueva Actividad" 
+                       FontSize="20" 
+                       FontAttributes="Bold" 
+                       HorizontalOptions="Center" 
+                       TextColor="White" 
+                       FontFamily="Century Schoolbook"/>
+            </Border>
+
+            <Border BackgroundColor="#1A1A1A" StrokeShape="RoundRectangle 12" Padding="0" StrokeThickness="1" Stroke="#2A2A2A">
+                <VerticalStackLayout Spacing="5" Padding="15">
+                    <Label Text="Título de la actividad" 
+                           FontSize="14" 
+                           TextColor="#AAAAAA" 
+                           FontAttributes="Bold"/>
+                    <Entry x:Name="EntTitulo" 
+                           Placeholder="" 
+                           TextColor="White" 
+                           PlaceholderColor="#666666"
+                           BackgroundColor="Transparent"/>
+                </VerticalStackLayout>
+            </Border>
+
+            <Border BackgroundColor="#1A1A1A" StrokeShape="RoundRectangle 12" Padding="0" StrokeThickness="1" Stroke="#2A2A2A">
+                <VerticalStackLayout Spacing="5" Padding="15">
+                    <Label Text="Materia" 
+                           FontSize="14" 
+                           TextColor="#AAAAAA" 
+                           FontAttributes="Bold"/>
+                    <HorizontalStackLayout Spacing="10">
+                        <Entry x:Name="EntMateria" 
+                               Placeholder="Ej: Matemáticas" 
+                               TextColor="White" 
+                               PlaceholderColor="#666666"
+                               BackgroundColor="Transparent"
+                               TextChanged="OnMateriaTextChanged"/>
+                        <Button x:Name="BtnSelectorMateria"
+                                Text="▼"
+                                FontSize="18"
+                                BackgroundColor="#6C1D45"
+                                TextColor="White"
+                                CornerRadius="8"
+                                WidthRequest="45"
+                                HeightRequest="45"
+                                Padding="0"
+                                Clicked="OnSelectorMateriaClicked"/>
+                    </HorizontalStackLayout>
+                    <CollectionView x:Name="ListaMaterias" 
+                                    IsVisible="False"
+                                    MaximumHeightRequest="150"
+                                    SelectionMode="Single"
+                                    SelectionChanged="OnMateriaSeleccionada"
+                                    BackgroundColor="#2A2A2A"
+                                    Margin="0,5,0,0">
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <Border BackgroundColor="#1A1A1A" 
+                                       Padding="10" 
+                                       Margin="2"
+                                       StrokeShape="RoundRectangle 6"
+                                       StrokeThickness="0">
+                                    <Label Text="{Binding .}" 
+                                           TextColor="White" 
+                                           FontSize="14"/>
+                                </Border>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                </VerticalStackLayout>
+            </Border>
+
+            <Border BackgroundColor="#1A1A1A" StrokeShape="RoundRectangle 12" Padding="0" StrokeThickness="1" Stroke="#2A2A2A">
+                <VerticalStackLayout Spacing="5" Padding="15">
+                    <Label Text="Descripción" 
+                           FontSize="14" 
+                           TextColor="#AAAAAA" 
+                           FontAttributes="Bold"/>
+                    <Editor x:Name="EntDescripcion" 
+                            Placeholder="Describe los detalles de la actividad..." 
+                            AutoSize="TextChanges" 
+                            MinimumHeightRequest="100"
+                            TextColor="White" 
+                            PlaceholderColor="#666666"
+                            BackgroundColor="Transparent"/>
+                </VerticalStackLayout>
+            </Border>
+
+            <Border BackgroundColor="#1A1A1A" StrokeShape="RoundRectangle 12" Padding="0" StrokeThickness="1" Stroke="#2A2A2A">
+                <VerticalStackLayout Spacing="10" Padding="15">
+                    <Label Text="Fecha y hora de entrega" 
+                           FontSize="14" 
+                           TextColor="#AAAAAA" 
+                           FontAttributes="Bold"/>
+                    <Grid ColumnDefinitions="*,*" ColumnSpacing="12">
+                        <Border Grid.Column="0" 
+                                BackgroundColor="#2A2A2A" 
+                                StrokeShape="RoundRectangle 8" 
+                                Padding="10"
+                                StrokeThickness="0">
+                            <DatePicker x:Name="DpFecha" 
+                                        TextColor="White"
+                                        BackgroundColor="Transparent"/>
+                        </Border>
+                        <Border Grid.Column="1" 
+                                BackgroundColor="#2A2A2A" 
+                                StrokeShape="RoundRectangle 8" 
+                                Padding="10"
+                                StrokeThickness="0">
+                            <TimePicker x:Name="TpHora" 
+                                        TextColor="White"
+                                        BackgroundColor="Transparent"/>
+                        </Border>
+                    </Grid>
+                </VerticalStackLayout>
+            </Border>
+
+            <Border BackgroundColor="#1A1A1A" StrokeShape="RoundRectangle 12" Padding="15" StrokeThickness="1" Stroke="#2A2A2A">
+                <VerticalStackLayout Spacing="15">
+                    <Label Text="Nivel de importancia" 
+                           FontSize="16" 
+                           FontAttributes="Bold" 
+                           TextColor="White"
+                           HorizontalOptions="Center"/>
+
+                    <VerticalStackLayout Spacing="8">
+                        <Label Text="🔴 Urgente" 
+                               FontSize="14" 
+                               FontAttributes="Bold" 
+                               TextColor="#FF6B6B" 
+                               HorizontalOptions="Center" />
+                        <FlexLayout Wrap="Wrap" 
+                                    JustifyContent="Center" 
+                                    AlignItems="Center">
+                            <RadioButton Content="" GroupName="TaskColor" Value="#6C1D45" CheckedChanged="OnColorRadioButtonCheckedChanged">
+                                <RadioButton.Resources>
+                                    <Style TargetType="RadioButton">
+                                        <Setter Property="Background" Value="#6C1D45" />
+                                        <Setter Property="BorderColor" Value="#6C1D45" />
+                                        <Setter Property="WidthRequest" Value="50" />
+                                        <Setter Property="HeightRequest" Value="50" />
+                                        <Setter Property="CornerRadius" Value="25" />
+                                        <Setter Property="Margin" Value="8" />
+                                    </Style>
+                                </RadioButton.Resources>
+                            </RadioButton>
+                            <RadioButton Content="" GroupName="TaskColor" Value="#8E5123" CheckedChanged="OnColorRadioButtonCheckedChanged">
+                                <RadioButton.Resources>
+                                    <Style TargetType="RadioButton">
+                                        <Setter Property="Background" Value="#8E5123" />
+                                        <Setter Property="BorderColor" Value="#8E5123" />
+                                        <Setter Property="WidthRequest" Value="50" />
+                                        <Setter Property="HeightRequest" Value="50" />
+                                        <Setter Property="CornerRadius" Value="25" />
+                                        <Setter Property="Margin" Value="8" />
+                                    </Style>
+                                </RadioButton.Resources>
+                            </RadioButton>
+                        </FlexLayout>
+                    </VerticalStackLayout>
+
+                    <BoxView HeightRequest="1" Color="#2A2A2A" HorizontalOptions="Fill"/>
+
+                    <VerticalStackLayout Spacing="8">
+                        <Label Text="🟡 Importante" 
+                               FontSize="14" 
+                               FontAttributes="Bold" 
+                               TextColor="#FFD93D" 
+                               HorizontalOptions="Center" />
+                        <FlexLayout Wrap="Wrap" 
+                                    JustifyContent="Center" 
+                                    AlignItems="Center">
+                            <RadioButton Content="" GroupName="TaskColor" Value="#B08400" CheckedChanged="OnColorRadioButtonCheckedChanged">
+                                <RadioButton.Resources>
+                                    <Style TargetType="RadioButton">
+                                        <Setter Property="Background" Value="#B08400" />
+                                        <Setter Property="BorderColor" Value="#B08400" />
+                                        <Setter Property="WidthRequest" Value="50" />
+                                        <Setter Property="HeightRequest" Value="50" />
+                                        <Setter Property="CornerRadius" Value="25" />
+                                        <Setter Property="Margin" Value="8" />
+                                    </Style>
+                                </RadioButton.Resources>
+                            </RadioButton>
+
+                            <RadioButton Content="" GroupName="TaskColor" Value="#877800" CheckedChanged="OnColorRadioButtonCheckedChanged">
+                                <RadioButton.Resources>
+                                    <Style TargetType="RadioButton">
+                                        <Setter Property="Background" Value="#877800" />
+                                        <Setter Property="BorderColor" Value="#877800" />
+                                        <Setter Property="WidthRequest" Value="50" />
+                                        <Setter Property="HeightRequest" Value="50" />
+                                        <Setter Property="CornerRadius" Value="25" />
+                                        <Setter Property="Margin" Value="8" />
+                                    </Style>
+                                </RadioButton.Resources>
+                            </RadioButton>
+                        </FlexLayout>
+                    </VerticalStackLayout>
+
+                    <BoxView HeightRequest="1" Color="#2A2A2A" HorizontalOptions="Fill"/>
+
+                    <VerticalStackLayout Spacing="8">
+                        <Label Text="🟢 No tan importante" 
+                               FontSize="14" 
+                               FontAttributes="Bold" 
+                               TextColor="#95E1D3" 
+                               HorizontalOptions="Center" />
+                        <FlexLayout Wrap="Wrap" 
+                                    JustifyContent="Center" 
+                                    AlignItems="Center">
+                            <RadioButton Content="" GroupName="TaskColor" Value="#5E6B00" CheckedChanged="OnColorRadioButtonCheckedChanged">
+                                <RadioButton.Resources>
+                                    <Style TargetType="RadioButton">
+                                        <Setter Property="Background" Value="#5E6B00" />
+                                        <Setter Property="BorderColor" Value="#5E6B00" />
+                                        <Setter Property="WidthRequest" Value="50" />
+                                        <Setter Property="HeightRequest" Value="50" />
+                                        <Setter Property="CornerRadius" Value="25" />
+                                        <Setter Property="Margin" Value="8" />
+                                    </Style>
+                                </RadioButton.Resources>
+                            </RadioButton>
+
+                            <RadioButton Content="" GroupName="TaskColor" Value="#0C5100" CheckedChanged="OnColorRadioButtonCheckedChanged">
+                                <RadioButton.Resources>
+                                    <Style TargetType="RadioButton">
+                                        <Setter Property="Background" Value="#0C5100" />
+                                        <Setter Property="BorderColor" Value="#0C5100" />
+                                        <Setter Property="WidthRequest" Value="50" />
+                                        <Setter Property="HeightRequest" Value="50" />
+                                        <Setter Property="CornerRadius" Value="25" />
+                                        <Setter Property="Margin" Value="8" />
+                                    </Style>
+                                </RadioButton.Resources>
+                            </RadioButton>
+                        </FlexLayout>
+                    </VerticalStackLayout>
+                </VerticalStackLayout>
+            </Border>
+
+            <Grid ColumnDefinitions="*,*" ColumnSpacing="12" Margin="0,10,0,20">
+                <Button Grid.Column="0"
+                        Text="✕ Cancelar" 
+                        Clicked="OnCancelarClicked" 
+                        BackgroundColor="#2A2A2A" 
+                        TextColor="White" 
+                        CornerRadius="12"
+                        HeightRequest="50"
+                        FontSize="16"
+                        FontAttributes="Bold"/>
+
+                <Button Grid.Column="1"
+                        Text="✓ Guardar" 
+                        Clicked="OnGuardarClicked" 
+                        BackgroundColor="#6C1D45" 
+                        TextColor="White" 
+                        CornerRadius="12"
+                        HeightRequest="50"
+                        FontSize="16"
+                        FontAttributes="Bold"/>
+            </Grid>
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

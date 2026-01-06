@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:modelo="clr-namespace:Imperius.Modelo"
+             xmlns:vm="clr-namespace:Imperius.VistaModelo"
+             xmlns:converters="clr-namespace:Imperius.Converters"
+             x:Class="Imperius.Vista.Menu"
+             Title="Aulas"
+             Padding="20" 
+             BackgroundColor="#0B0B0B">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converters:IsNotNullOrEmptyConverter x:Key="IsNotNullOrEmptyConverter"/>
+            <converters:IsZeroConverter x:Key="IsZeroConverter"/>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ScrollView>
+        <VerticalStackLayout Spacing="20">
+            <HorizontalStackLayout>
+                <Label Text="Hola, "
+                       FontAttributes="Bold"
+                       FontFamily="Century Schoolbook"
+                       FontSize="28"
+                       HorizontalOptions="Start"
+                       VerticalOptions="Center"
+                       TextColor="White"/>
+                <Label Text="{Binding NombreUsuario}"
+                       FontAttributes="Bold"
+                       FontFamily="Century Schoolbook"
+                       FontSize="28"
+                       HorizontalOptions="Start"
+                       VerticalOptions="Center"
+                       TextColor="White"/>
+            </HorizontalStackLayout>
+
+            <HorizontalStackLayout HorizontalOptions="End">
+                <Button Text="Agregar actividad +"
+                        Clicked="OnAddDebugTareaClicked"
+                        BackgroundColor="#6C1D45" 
+                        TextColor="White"
+                        CornerRadius="12"
+                        HeightRequest="45"
+                        Padding="15,0"/>
+            </HorizontalStackLayout>
+
+            <Border BackgroundColor="#1A1A1A" 
+                    StrokeShape="RoundRectangle 12" 
+                    Padding="15" 
+                    StrokeThickness="1" 
+                    Stroke="#2A2A2A"
+                    Margin="0,8,0,0">
+
+                <CollectionView ItemsSource="{Binding TareasAgrupadas}"
+                                SelectionMode="None">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate x:DataType="modelo:TareaGrupo">
+                            <VerticalStackLayout Spacing="8" Margin="0,0,0,16">
+
+                                <Border Padding="12"
+                                        Stroke="#2A2A2A"
+                                        BackgroundColor="Transparent"
+                                        StrokeThickness="0">
+                                    <HorizontalStackLayout Spacing="10">
+                                        <BoxView WidthRequest="4" 
+                                                 HeightRequest="24" 
+                                                 Color="{Binding ColorMateria}"
+                                                 CornerRadius="2"
+                                                 VerticalOptions="Center"/>
+                                        <Label Text="{Binding NombreMateria}" 
+                                               FontSize="20" 
+                                               FontAttributes="Bold" 
+                                               FontFamily="Century Schoolbook" 
+                                               TextColor="White"
+                                               VerticalOptions="Center"/>
+                                        <Label Text="{Binding CantidadTareas, StringFormat='({0})'}"
+                                               FontSize="16"
+                                               TextColor="#AAAAAA"
+                                               VerticalOptions="Center"/>
+                                    </HorizontalStackLayout>
+                                </Border>
+
+                                <CollectionView ItemsSource="{Binding Tareas}"
+                                                SelectionMode="Single"
+                                                SelectionChanged="OnTareaSelectionChanged">
+                                    <CollectionView.ItemTemplate>
+                                        <DataTemplate x:DataType="modelo:Tarea">
+                                            <Border Padding="12" 
+                                                    Margin="0,4,0,4"
+                                                    BackgroundColor="#0B0B0B"
+                                                    Stroke="#2A2A2A"
+                                                    StrokeThickness="1"
+                                                    StrokeShape="RoundRectangle 8">
+                                                <Grid ColumnDefinitions="*,Auto" RowDefinitions="Auto,Auto">
+                                                    <Label Grid.Row="0" Grid.Column="0"
+                                                           Text="{Binding Titulo, StringFormat='· {0}'}"
+                                                           FontAttributes="Bold"
+                                                           FontSize="15"
+                                                           TextColor="White"
+                                                           Margin="0,0,8,4"/>
+
+                                                    <Label Grid.Row="0" Grid.Column="1"
+                                                           Text="{Binding FechaEntregaFormateada}"
+                                                           FontSize="12"
+                                                           TextColor="Gray"
+                                                           FontAttributes="Bold"
+                                                           HorizontalOptions="End"
+                                                           VerticalOptions="Center">
+                                                        <Label.Triggers>
+                                                            <DataTrigger TargetType="Label"
+                                                                         Binding="{Binding VenceEn24Horas}"
+                                                                         Value="True">
+                                                                <Setter Property="TextColor" Value="#FF6B6B" />
+                                                            </DataTrigger>
+                                                            <DataTrigger TargetType="Label"
+                                                                         Binding="{Binding VenceEn7Dias}"
+                                                                         Value="True">
+                                                                <Setter Property="TextColor" Value="#FFD93D" />
+                                                            </DataTrigger>
+                                                        </Label.Triggers>
+                                                    </Label>
+
+                                                    <Label Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"
+                                                           Text="{Binding Descripcion}"
+                                                           FontSize="12"
+                                                           TextColor="#AAAAAA"
+                                                           LineBreakMode="TailTruncation"
+                                                           MaxLines="2"
+                                                           Margin="0,4,0,0"
+                                                           IsVisible="{Binding Descripcion, Converter={StaticResource IsNotNullOrEmptyConverter}}"/>
+                                                </Grid>
+                                            </Border>
+                                        </DataTemplate>
+                                    </CollectionView.ItemTemplate>
+                                </CollectionView>
+                            </VerticalStackLayout>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+
+            </Border>
+
+            <BoxView HeightRequest="1"
+                     Color="#2A2A2A"
+                     HorizontalOptions="Fill"
+                     Margin="0,8,0,0"/>
+
+            <Label Text="Parece que no hay nada."
+                   x:Name="Huh"
+                   FontFamily="Century Schoolbook"
+                   FontSize="12"
+                   HorizontalOptions="Center"
+                   VerticalOptions="Center"
+                   Margin="0,8,0,0"
+                   TextColor="DimGrey"
+                   IsVisible="{Binding TareasAgrupadas.Count, Converter={StaticResource IsZeroConverter}}"/>
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

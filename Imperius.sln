@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.36518.9 d17.14
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Imperius", "Imperius\Imperius.csproj", "{4D926720-D1E3-4EEF-B1F8-535987704E0A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4D926720-D1E3-4EEF-B1F8-535987704E0A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4D926720-D1E3-4EEF-B1F8-535987704E0A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4D926720-D1E3-4EEF-B1F8-535987704E0A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4D926720-D1E3-4EEF-B1F8-535987704E0A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {69B3FDC4-BF8B-403B-9742-D8462B538C0A}
+	EndGlobalSection
+EndGlobal

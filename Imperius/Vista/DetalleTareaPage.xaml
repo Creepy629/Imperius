@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:modelo="clr-namespace:Imperius.Modelo"
+             x:Class="Imperius.Vista.DetalleTareaPage"
+             x:DataType="modelo:Tarea"
+             Title="Detalles de la Actividad"
+             Padding="20"
+             BackgroundColor="#0B0B0B">
+    <ContentPage.Content>
+        <VerticalStackLayout Spacing="20">
+
+            <Border BackgroundColor="#1A1A1A" 
+                    StrokeShape="RoundRectangle 12" 
+                    Padding="15" 
+                    StrokeThickness="1" 
+                    Stroke="#2A2A2A">
+
+                <VerticalStackLayout Spacing="16">
+
+                    <VerticalStackLayout Spacing="4">
+                        <Label Text="{Binding Titulo}"
+                               FontSize="28"
+                               FontAttributes="Bold"
+                               FontFamily="Century Schoolbook"
+                               TextColor="White" />
+
+                        <HorizontalStackLayout Spacing="8">
+                            <BoxView WidthRequest="4" 
+                                     HeightRequest="20" 
+                                     Color="{Binding ColorHex}"
+                                     CornerRadius="2"
+                                     VerticalOptions="Center"/>
+                            <Label Text="{Binding Materia}"
+                                   FontSize="18"
+                                   TextColor="#AAAAAA"
+                                   FontFamily="Century Schoolbook" />
+                        </HorizontalStackLayout>
+                    </VerticalStackLayout>
+
+                    <BoxView HeightRequest="1"
+                             Color="#2A2A2A"
+                             HorizontalOptions="Fill"/>
+
+                    <HorizontalStackLayout Spacing="10" VerticalOptions="Center">
+                        <Label Text="📅 Entrega:" 
+                               FontSize="16" 
+                               FontAttributes="Bold" 
+                               TextColor="White"/>
+                        <Label Text="{Binding FechaVencimientoString}" 
+                               FontSize="16"
+                               TextColor="White"
+                               VerticalOptions="Center"/>
+                        <Label Text="(VENCIDA)"
+                               FontSize="16"
+                               TextColor="#FF6B6B"
+                               FontAttributes="Bold"
+                               IsVisible="{Binding EstaVencida}"/>
+                    </HorizontalStackLayout>
+
+                    <ScrollView HeightRequest="200" VerticalOptions="Start">
+                        <Label Text="{Binding Descripcion}"
+                               FontSize="16"
+                               LineBreakMode="WordWrap"
+                               TextColor="White"/>
+                    </ScrollView>
+
+                </VerticalStackLayout>
+
+            </Border>
+
+            <Button x:Name="BtnMarcarComoCompletada"
+                    Text="✓ Marcar como completada"
+                    FontAttributes="Bold"
+                    CornerRadius="12"
+                    HeightRequest="55"
+                    Padding="12"
+                    Clicked="OnMarcarComoCompletadaClicked"
+                    VerticalOptions="End">
+                <Button.Style>
+                    <Style TargetType="Button">
+                        <Setter Property="TextColor" Value="White" />
+                        <Setter Property="BackgroundColor" Value="#6C1D45" />
+                        <Style.Triggers>
+                            <DataTrigger TargetType="Button"
+                                         Binding="{Binding EstaCompletada}"
+                                         Value="True">
+                                <Setter Property="Text" Value="Completada" />
+                                <Setter Property="BackgroundColor" Value="#0C5100" />
+                                <Setter Property="IsEnabled" Value="False" />
+                            </DataTrigger>
+                            <DataTrigger TargetType="Button"
+                                         Binding="{Binding EstaVencida}"
+                                         Value="True">
+                                <Setter Property="Text" Value="Vencida, no se puede completar" />
+                                <Setter Property="BackgroundColor" Value="#a10000" />
+                                <Setter Property="IsEnabled" Value="False" />
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+            </Button>
+
+        </VerticalStackLayout>
+    </ContentPage.Content>
+</ContentPage>
