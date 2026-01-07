@@ -15,7 +15,7 @@ Imperius te ayuda a mantener tus tareas bajo control. Añade tareas, programa re
 - Acceso rápido a los detalles de cada tarea.
 - Operación offline: los datos se almacenan en el dispositivo.
 
-## Requisitos
+## Requisitos para compilación
 - Dispositivo o emulador compatible con .NET MAUI.
 - .NET 9 y la workload de MAUI instalada si vas a compilar desde código.
 - Visual Studio 2026 recomendado para desarrollo y depuración.
@@ -23,12 +23,12 @@ Imperius te ayuda a mantener tus tareas bajo control. Añade tareas, programa re
 ## Instalación rápida
 1. Descarga de la aplicación
   - Entra a la página de *Releases*
-  - Descarga el último binario *Imperius.apk*
+  - Descarga el último binario dependiendo de tu dispositivo.
   - Instala la aplicación en tu dispositivo abriendo el archivo descargado
 3. Descarga del código fuente
-  - Clona el repositorio: `git clone <url-del-repo>`
-  - Abre la solución en Visual Studio: __File > Open > Project/Solution__
-  - Selecciona la plataforma (Android/iOS/Windows) y ejecuta: __Debug > Start Debugging__ o inicia la app desde tu dispositivo.
+  - Clona el repositorio: `git clone https://github.com/Creepy629/Imperius`
+  - Abre la solución en Visual Studio
+  - Selecciona la plataforma (Android/iOS/Windows) y ejecuta la compilación como indica predeterminadamente Visual Studio.
 
 ## Privacidad y datos
 Los datos se guardan localmente en tu dispositivo. No se envía información a servidores externos por defecto.
