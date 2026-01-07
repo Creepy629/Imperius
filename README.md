@@ -22,13 +22,20 @@ Imperius te ayuda a mantener tus tareas bajo control. Añade tareas, programa re
 
 ## Instalación rápida
 1. Descarga de la aplicación
-  - Entra a la página de *Releases*
+  - Entra a la página de *Releases*.
   - Descarga el último binario dependiendo de tu dispositivo.
-  - Instala la aplicación en tu dispositivo abriendo el archivo descargado
+  - Instala la aplicación en tu dispositivo abriendo el archivo descargado.
 3. Descarga del código fuente
-  - Clona el repositorio: `git clone https://github.com/Creepy629/Imperius`
-  - Abre la solución en Visual Studio
-  - Selecciona la plataforma (Android/iOS/Windows) y ejecuta la compilación como indica predeterminadamente Visual Studio.
+  A. Clonación
+    - Abrir Visual Studio
+    - Elegir la opción "Clonar un repositorio"
+    - Pegar la liga `https://github.com/Creepy629/Imperius.git` y entrar al proyecto clonado.
+    - Selecciona la plataforma (Android/iOS/Windows) y ejecuta la compilación como indica predeterminadamente Visual Studio.
+  B. Descarga directa
+    - En esta página, dar Click al botón verde `Código` y entonces `Descargar ZIP`.
+    - Extraer los contenidos del archivo descargado
+    - Abrir la solución.
+    - Selecciona la plataforma (Android/iOS/Windows) y ejecuta la compilación como indica predeterminadamente Visual Studio.
 
 ## Privacidad y datos
 Los datos se guardan localmente en tu dispositivo. No se envía información a servidores externos por defecto.
